@@ -205,7 +205,7 @@ Our postulate predicts hallucination rates scale with prompt entropy $H(\mathbf{
 This postulate synthesizes localization blurs, PRH attractors, ICL/FEP minimization, and noisy channel bounds into a dynamical explanation of hallucinations, connecting to energy conservation via entropy dissipation.
 
 ## Fundamental Relation to Energy Conservation
-## This Section might be useless as I have it for another paper that is related, see notes at end.
+This Section might be useless as I have it for another paper that is related, see notes at end.
 This section might be better off integrated more tightly with the trajectory dynamics, boh.
 
 Landauer’s principle states erasing one bit dissipates at least $kT \ln 2$ energy ($k$ Boltzmann constant, $T$ temperature). In LLMs, inefficient trajectories (drifting orbits) increase entropy production, raising computational cost. Pruning (removing redundant weights) or quantization (reducing precision) cuts energy use by up to 30%, compressing state transitions. Thermodynamically, LLMs minimize free energy:
