@@ -70,6 +70,10 @@ This section establishes the mathematical bedrock, linking quantum and signal do
 While the undersampling-hallucination analogy draws from deterministic aliasing in the Nyquist theorem—where inadequate sampling rate predictably folds high frequencies into lower ones, distorting reconstruction—semantic drift in LLMs introduces stochastic variability. For instance, temperature sampling in the softmax layer (e.g., T>1T > 1T > 1
 ) injects randomness, amplifying small perturbations in latent trajectories much like noise in a communication channel exacerbates aliasing errors. This results in probabilistic "aliasing" in token space, where insufficient contextual "samples" (prompt tokens) fail to phase-align embeddings, leading to chaotic drifts toward hallucinatory outputs. Empirical studies support this view, showing output degradation as cumulative semantic drift in long-form generation, often triggered by initial context ambiguity.
 
+## Refining the Analogy: Deterministic vs. Stochastic Elements
+
+While the undersampling-hallucination analogy draws from deterministic aliasing in the Nyquist theorem—where inadequate sampling rate predictably folds high frequencies into lower ones, distorting reconstruction—semantic drift in LLMs introduces stochastic variability. For instance, temperature sampling in the softmax layer (e.g., T>1T > 1T > 1) injects randomness, amplifying small perturbations in latent trajectories much like noise in a communication channel exacerbates aliasing errors. This results in probabilistic "aliasing" in token space, where insufficient contextual "samples" (prompt tokens) fail to phase-align embeddings, leading to chaotic drifts toward hallucinatory outputs. Empirical studies support this view, showing output degradation as cumulative semantic drift in long-form generation, often triggered by initial context ambiguity
+
 
 
 ## Perfect Localization in One Domain Blurs the Other: Implications for Signal Reconstruction and Quantum Indeterminism
