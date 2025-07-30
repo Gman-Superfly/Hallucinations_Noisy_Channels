@@ -243,10 +243,8 @@ I need to add better connections as in a better explanation as to what constitut
 
 - **Fourier Uncertainty**:
 
-  - I corrected in Introduction and Connection sections because I used Hertz as a standard under this convention, the standard uncertainty is σt⋅σf≥1/(4π)\sigma_t \cdot \sigma_f \geq 1/(4\pi)\sigma_t \cdot \sigma_f \geq 1/(4\pi)
- (where σf\sigma_f\sigma_f
- is the spread in frequency (f), not angular frequency ω=2πf\omega = 2\pi f\omega = 2\pi f
-).
+  - I corrected in Introduction and Connection sections because I used Hertz as a standard under this convention, the standard uncertainty is σt⋅σf≥1/(4π)\sigma_t \cdot \sigma_f \geq 1/(4\pi)  or something liek that, the conventions are driving me loopy
+ (where σf\sigma_f\sigma_f is the spread in frequency (f), not angular frequency ω=2πf\omega = 2\pi f\omega = 2\pi f ).
 
 
   - Integral form adjusted to \(\geq \frac{1}{16\pi^2} \left( \int |f(x)|^2 dx \right)^2\) for frequency \(\xi\), or \(\geq \frac{1}{4} \left( \int |f(x)|^2 dx \right)^2\) for angular frequency \(\omega\), ensuring clarity.
@@ -255,3 +253,15 @@ I need to add better connections as in a better explanation as to what constitut
 - The paper maintains all original content fron November and February, including the FEP might not be needed at all, I have the FEP as part of a different paper and talking about it twice might be stupid to say the least as the papers are related and the FEP connection obvious.
 
 The claim that chain-of-thought (CoT) prompting acts like Hamming-like error correction is speculative but reasonable. I need to cite papers on CoT (e.g., Wei et al., 2022, “Chain-of-Thought Prompting”) to strengthen this and make lots of tests.
+
+
+
+## RE sampling_reconstruction.py file:
+
+The analogy between Nyquist phase alignment (from the Shannon-Nyquist sampling theorem, where sinc-based reconstruction relies on sufficient sampling to avoid aliasing via phase accumulation) and LLM trajectories in latent space (e.g., embeddings evolving through layers, potentially drifting into hallucinations due to insufficient context) is valid as a conceptual framework, but it's not yet established in the literature as a direct, peer-reviewed parallel. 
+It's a creative extension that holds logical merit: both scenarios involve "reconstruction" from sparse or inadequate "samples" (data points in signals vs. prompt tokens in LLMs), where undersampling leads to distortion (aliasing in signals) or errors (hallucinations in LLMs). However, current research on LLM hallucinations in latent space focuses more on steering, entropy, or Bayesian estimation without invoking signal processing theorems like Nyquist.
+
+For instance, works on reducing hallucinations through latent space manipulation emphasize steering vectors to separate truthful vs. hallucinated representations during inference, enhancing stability without model retraining. Similarly, Bayesian approaches estimate hallucination rates in in-context learning by treating prompts as "samples" that condition posterior predictions, linking low-likelihood responses to hallucinations from epistemic uncertainty (e.g., sparse context). These align indirectly with our Nyquist-inspired view of "trajectory accumulation" mirroring phase alignment for convergence, but no papers explicitly draw the signal processing analogy.
+
+If validated empirically (e.g., via simulations mapping prompt entropy to latent drift, as in our code test for Nyquist), this could become a novel contribution. For now, it's plausible speculation building on established latent space dynamics in hallucinations and we have much work to do.
+## Caveat, I like fun and thinking so take this seriously only when all the tests are done.
