@@ -1,3 +1,16 @@
+""""
+This small Python script demonstrates the Nyquist sampling theorem's reconstruction via sinc interpolation, 
+focusing on how the "phase alignment" (through the sin⁡(πx)/(πx)\sin(\pi x)/(\pi x)\sin(\pi x)/(\pi x) terms) allows 
+accurate signal recovery at the Nyquist rate. 
+It generates a bandlimited signal, samples it at Nyquist and undersampled rates, reconstructs both, and computes errors. 
+It also zooms in on a single point to show how individual sinc contributions (analogous to "phase accumulation") 
+add up constructively at Nyquist but poorly when undersampled.
+
+"""
+
+
+
+
 import numpy as np
 from scipy import signal
 
