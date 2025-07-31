@@ -1,4 +1,7 @@
 """
+It's a toy test, wait LOL
+There is a lot of work left to do in the repo, try again in a month or two..
+
 
 Mean drift short: 3.0904866456985474 ± 0.0049201761781378596
 Mean drift long: 0.6973441898822784 ± 0.0018071401364650765
