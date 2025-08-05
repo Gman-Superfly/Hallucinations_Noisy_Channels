@@ -1,6 +1,6 @@
 # LLM Hallucinations, Semantic Drift and Signal Processing, Notes on Large Language Models
 
-## THIS NEED A FULL UPDATE TO THE NEW PAPER FORMAT SIMILAR TO THE REPO README
+## THIS NEEDS A FULL UPDATE TO THE NEW PAPER FORMAT SIMILAR TO THE REPO README
 
 ## Abstract
 
@@ -267,5 +267,6 @@ For instance, works on reducing hallucinations through latent space manipulation
 
 If validated empirically (e.g., via simulations mapping prompt entropy to latent drift, as in our code test for Nyquist), this could become a novel contribution. For now, it's plausible speculation building on established latent space dynamics in hallucinations and we have much work to do.
 ## Caveat, I like fun and thinking so take this seriously only when all the tests are done.
+
 
 
