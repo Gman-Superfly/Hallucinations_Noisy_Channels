@@ -1,7 +1,7 @@
 
 ## **A Modeling Framework for LLM Hallucinations: Semantic Drift, Information Thresholds, and Reconstruction Failure**
 
-##WORK IN PROGRESS CHECK BACK SOON
+## WORK IN PROGRESS CHECK BACK SOON
 
 ### Abstract
 
