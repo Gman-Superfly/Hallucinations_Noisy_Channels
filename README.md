@@ -2,6 +2,9 @@
 
 This repository presents preliminary notes on potential links between large language model (LLM) hallucinations and ideas from signal processing, 
 uncertainty principles, and information theory. 
+
+[note] This is a a way of framing the problem as a signal processing issue to then use tried and tested tools in DSP
+
 We tentatively explore analogies to the Shannon-Nyquist theorem, the Uncertainty principle, the Platonic Representation Hypothesis, 
 in-context learning, error correction via Shannon's noisy channel coding theorem and Hamming bounds, 
 while fully recognizing these cross-domain connections work through analogous mechanisms and may not be direct 
