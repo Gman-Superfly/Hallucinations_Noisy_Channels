@@ -1,6 +1,8 @@
 
 ## **A Modeling Framework for LLM Hallucinations: Semantic Drift, Information Thresholds, and Reconstruction Failure**
 
+##WORK IN PROGRESS CHECK BACK SOON
+
 ### Abstract
 
 This paper proposes a novel modeling framework for understanding Large Language Model (LLM) hallucinations by drawing principled analogies from signal processing, information theory, and physics. We posit that hallucinations are not random errors but a predictable form of reconstruction failure. This failure, termed **Semantic Drift**, occurs when the contextual information in a prompt falls below a required threshold for the given conceptual complexity, analogous to how undersampling a signal below the Nyquist rate leads to aliasing. The framework is grounded in the Fourier uncertainty principle, which sets fundamental trade-offs in information localization. We connect this principle to the structure of LLM latent spaces, suggesting that concepts exist as stable attractor manifolds. When a prompt provides insufficient information, the model's internal trajectory fails to converge to the correct manifold, resulting in a hallucinatory output. This is further contextualized using the Free Energy Principle (FEP) to explain in-context learning (ICL) as a trajectory-guiding mechanism and Shannon's noisy channel coding theorem to model error correction, where techniques like Chain-of-Thought (CoT) prompting add redundancy to stabilize the semantic "signal." By integrating thermodynamic constraints like Landauer's principle, we link inefficient, drifting trajectories to higher computational costs. This synthesis yields a set of testable hypotheses aimed at transforming our understanding of LLM reliability from an empirical art to a predictive science.
