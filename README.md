@@ -1,6 +1,5 @@
-## **A Modeling Framework for LLM Hallucinations: Semantic Drift, Information Thresholds, and Reconstruction Failure**
 
-##WORK IN PROGRESS CHECK BACK SOON
+## **A Modeling Framework for LLM Hallucinations: Semantic Drift, Information Thresholds, and Reconstruction Failure**
 
 ### Abstract
 
@@ -10,7 +9,7 @@ This paper proposes a novel modeling framework for understanding Large Language 
 
 The remarkable capabilities of Large Language Models (LLMs) are shadowed by their propensity for "hallucinations"—the generation of fluent but factually incorrect or nonsensical outputs. While often treated as a black-box problem, we argue that hallucinations can be understood through a principled framework inspired by fundamental laws of information. This paper builds a bridge between the Fourier uncertainty principle, a cornerstone of physics and signal processing, and the internal dynamics of LLMs.
 
-The Fourier uncertainty principle establishes a fundamental trade-off: a signal cannot be simultaneously localized in two conjugate domains (e.g., time and frequency). This principle manifests as the Heisenberg uncertainty principle  ($\Delta x \cdot \Delta p \geq \hbar/2$) and as the Gabor limit underlying the Shannon-Nyquist sampling theorem in signal processing ($\sigma_t \cdot \sigma_\omega \geq 1/2$). We propose that a similar informational trade-off governs the representational capacity of LLMs.
+The Fourier uncertainty principle establishes a fundamental trade-off: a signal cannot be simultaneously localized in two conjugate domains (e.g., time and frequency). This principle manifests as the Heisenberg uncertainty principle in QM (Δx · Δp ≥ ℏ/2) and as the Gabor limit underlying the Shannon-Nyquist sampling theorem in signal processing (σ_t · σ_ω ≥ 1/2). We propose that a similar informational trade-off governs the representational capacity of LLMs.
 
 Our central thesis is that LLM hallucinations are a form of **reconstruction failure due to an information deficit**. We introduce the concept of **Semantic Drift**: when a prompt provides insufficient contextual information to specify a concept of a certain complexity, the LLM's internal state trajectory fails to stabilize within the correct region of its latent space. This failure is analogous to aliasing in signal reconstruction, where an insufficient sampling rate leads to an irreversible distortion of the original signal.
 
@@ -25,19 +24,19 @@ Ultimately, this synthesis provides a coherent, testable model of hallucinations
 
 ### 2. The Foundational Trade-off: Fourier Uncertainty in Physics and Signals
 
-The mathematical bedrock of our framework is the Fourier uncertainty principle. For any function $f(t)$ and its Fourier transform $\hat{f}(\omega)$, the product of their standard deviations is bounded:
-$$
-\sigma_t \cdot \sigma_\omega \geq \frac{1}{2}
-$$
+The mathematical bedrock of our framework is the Fourier uncertainty principle. For any function f(t) and its Fourier transform f̂(ω), the product of their standard deviations is bounded:
+
+σ_t · σ_ω ≥ 1/2
+
 This inequality is not specific to one domain; it is a universal property of wave-like phenomena and information itself. It dictates that precision in one domain necessitates uncertainty in its conjugate domain.
 
-*   **In QM:** This principle manifests as the Heisenberg uncertainty principle. The position wavefunction $\psi(x)$ and momentum-space wavefunction $\hat{\psi}(p)$ are Fourier conjugates. Localizing a particle's position (making $\psi(x)$ sharp) inevitably broadens its momentum distribution (making $\hat{\psi}(p)$ wide), as constrained by $\Delta x \cdot \Delta p \geq \hbar/2$.
+*   **In QM:** This principle manifests as the Heisenberg uncertainty principle. The position wavefunction ψ(x) and momentum-space wavefunction ψ̂(p) are Fourier conjugates. Localizing a particle's position (making ψ(x) sharp) inevitably broadens its momentum distribution (making ψ̂(p) wide), as constrained by Δx · Δp ≥ ℏ/2.
 
-*   **In Signal Processing:** The principle underpins the Shannon-Nyquist sampling theorem. A continuous signal $s(t)$ bandlimited to a maximum angular frequency $\omega_{\max}$ can only be perfectly reconstructed if sampled at a rate $f_s \geq \omega_{\max}/\pi$. The reconstruction formula,
-    $$
-    s(t) = \sum_{n=-\infty}^{\infty} s(nT) \cdot \frac{\sin(\pi (t/T - n))}{\pi (t/T - n)},
-    $$
-    relies on this bandwidth limit. Sampling below this rate (undersampling) causes aliasing, where high-frequency components are irreversibly folded into and mistaken for lower frequencies. The bandwidth of a signal is thus a measure of its "complexity," which dictates the minimum information (sample density) needed for faithful reconstruction.
+*   **In Signal Processing:** The principle underpins the Shannon-Nyquist sampling theorem. A continuous signal s(t) bandlimited to a maximum angular frequency ω_max can only be perfectly reconstructed if sampled at a rate f_s ≥ ω_max/π. The reconstruction formula,
+
+s(t) = Σ_{n=-∞}^{∞} s(nT) · sin(π(t/T - n))/π(t/T - n)
+
+relies on this bandwidth limit. Sampling below this rate (undersampling) causes aliasing, where high-frequency components are irreversibly folded into and mistaken for lower frequencies. The bandwidth of a signal is thus a measure of its "complexity," which dictates the minimum information (sample density) needed for faithful reconstruction.
 
 These examples illustrate a universal rule: the complexity of an object determines the amount of information required to represent it without ambiguity. This rule, we argue, extends to the conceptual representations within LLMs.
 
@@ -70,14 +69,14 @@ This is a failure of reconstruction, analogous to aliasing from undersampling.
 
 #### 5.1. Trajectory Dynamics in a Discrete-Depth System
 
-An LLM's forward pass is a discrete-depth dynamical system. The hidden state at layer $l+1$, $\mathbf{h}_{l+1}$, is a function of the previous state $\mathbf{h}_l$ and the input prompt $\mathbf{p}$:
-$$
-\mathbf{h}_{l+1} = \mathbf{h}_l + \text{Attn}(\mathbf{h}_l, \mathbf{p}) + \text{FFN}(\mathbf{h}_l)
-$$
-The sequence of hidden states $\{\mathbf{h}_0, \mathbf{h}_1, ..., \mathbf{h}_L\}$ constitutes a **trajectory** through the latent space. While we can use concepts from continuous dynamics like "attractors" as useful abstractions, the system is fundamentally discrete.
+An LLM's forward pass is a discrete-depth dynamical system. The hidden state at layer l+1, **h_{l+1}**, is a function of the previous state **h_l** and the input prompt **p**:
 
-*   **Stable Convergence:** Sufficient contextual information from the prompt $\mathbf{p}$ guides the trajectory to enter and remain within the basin of the correct conceptual manifold.
-*   **Semantic Drift:** An information deficit (e.g., an ambiguous prompt) places the initial state $\mathbf{h}_0$ in a region of high uncertainty. The trajectory becomes highly sensitive to small perturbations, exhibiting chaotic-like behavior. This can be characterized by measuring the divergence of initially close trajectories as they pass through the network's layers. The trajectory may then fail to stabilize, or it may converge to an incorrect manifold (a "hallucinatory" answer).
+**h_{l+1}** = **h_l** + Attn(**h_l**, **p**) + FFN(**h_l**)
+
+The sequence of hidden states {**h_0**, **h_1**, ..., **h_L**} constitutes a **trajectory** through the latent space. While we can use concepts from continuous dynamics like "attractors" as useful abstractions, the system is fundamentally discrete.
+
+*   **Stable Convergence:** Sufficient contextual information from the prompt **p** guides the trajectory to enter and remain within the basin of the correct conceptual manifold.
+*   **Semantic Drift:** An information deficit (e.g., an ambiguous prompt) places the initial state **h_0** in a region of high uncertainty. The trajectory becomes highly sensitive to small perturbations, exhibiting chaotic-like behavior. This can be characterized by measuring the divergence of initially close trajectories as they pass through the network's layers. The trajectory may then fail to stabilize, or it may converge to an incorrect manifold (a "hallucinatory" answer).
 
 #### 5.2. Error Correction and Thermodynamic Costs
 
@@ -85,7 +84,7 @@ This framework allows us to integrate concepts from error correction and thermod
 
 *   **Error Correction as Trajectory Stabilization:** We can view the LLM as a noisy communication channel, where the "message" is the intended concept and "noise" is the semantic ambiguity from the prompt or model biases. Shannon's noisy channel coding theorem provides a capacity limit for reliable communication. If the prompt's information content is below this capacity, errors (hallucinations) are inevitable. Prompting techniques like **Chain-of-Thought (CoT)** can be modeled as a form of error-correcting code. By forcing the model to generate intermediate reasoning steps, CoT adds redundancy to the semantic signal. This "semantic parity check" helps stabilize the trajectory, allowing it to detect and correct deviations before settling on a final answer. This is analogous to how Hamming codes use parity bits to correct errors in digital communication.
 
-*   **Thermodynamic Inefficiency of Hallucinations:** Drifting, chaotic trajectories are computationally inefficient. According to **Landauer's principle**, every irreversible bit of information erasure dissipates a minimum amount of energy ($kT \ln 2$). An inefficient search through the latent space, involving many corrective steps and high uncertainty, corresponds to greater entropy production and thus higher energy consumption. A well-guided trajectory that quickly converges is thermodynamically efficient. This provides a physical grounding for the intuition that confused, hallucinatory reasoning is more "difficult" for the model, linking informational stability directly to computational cost.
+*   **Thermodynamic Inefficiency of Hallucinations:** Drifting, chaotic trajectories are computationally inefficient. According to **Landauer's principle**, every irreversible bit of information erasure dissipates a minimum amount of energy (kT ln 2). An inefficient search through the latent space, involving many corrective steps and high uncertainty, corresponds to greater entropy production and thus higher energy consumption. A well-guided trajectory that quickly converges is thermodynamically efficient. This provides a physical grounding for the intuition that confused, hallucinatory reasoning is more "difficult" for the model, linking informational stability directly to computational cost.
 
 ### 6. Discussion and Testable Hypotheses
 
