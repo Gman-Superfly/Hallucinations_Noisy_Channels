@@ -88,6 +88,12 @@ This framework allows us to integrate concepts from error correction and thermod
 
 *   **Thermodynamic Inefficiency of Hallucinations:** Drifting, chaotic trajectories are computationally inefficient. According to **Landauer's principle**, every irreversible bit of information erasure dissipates a minimum amount of energy (kT ln 2). An inefficient search through the latent space, involving many corrective steps and high uncertainty, corresponds to greater entropy production and thus higher energy consumption. A well-guided trajectory that quickly converges is thermodynamically efficient. This provides a physical grounding for the intuition that confused, hallucinatory reasoning is more "difficult" for the model, linking informational stability directly to computational cost.
 
+#### 5.3 Context Fatigue
+
+*  **There is a new paper I'm aware of In Context Rot...**
+so this section is being rewritten and we will study the paper carefully as it seems the findings are useful for adding "context LOL" to this section
+
+
 ### 6. Discussion and Testable Hypotheses
 
 This paper has proposed a modeling framework for LLM hallucinations based on principles of information, uncertainty, and reconstruction.
