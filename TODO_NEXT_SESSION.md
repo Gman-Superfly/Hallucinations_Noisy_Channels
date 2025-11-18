@@ -3,6 +3,7 @@
 1. **Scale redundancy/geometry experiments** on open-weight LLMs (e.g., run the semantic redundancy ratio and geometric alignment notebooks against a real model, collect metrics).
 2. **Run controllability/observability diagnostics** on real prompts (measure control projections and entropy using open-weight checkpoints or API results).
 3. **Document the new findings** in `README.md` and `paper/draft.md`, including any figures/metrics generated above.
+4. **Correlate entropy with drift** by plotting the logged entropy/variance from the control diagnostics against observed drift or hallucination rates, turning the FEP claim into quantitative evidence.
 
 A couple of additions could strengthen the draft:
 
