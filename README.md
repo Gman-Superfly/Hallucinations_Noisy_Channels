@@ -244,3 +244,8 @@ We’re deliberately keeping the tone conversational here—the math matters, bu
 We have reframed the problem of LLM hallucinations from an unpredictable flaw to a principled phenomenon of **reconstruction failure**. Our model of **Semantic Drift**, inspired by foundational principles of information theory and signal processing, posits that hallucinations are the result of an information deficit in the prompt, leading to unstable trajectories in the model's latent space.
 
 By synthesizing concepts from Fourier uncertainty, the Free Energy Principle, and Shannon's noisy channel theorem, we have constructed a coherent and testable framework. This approach provides a new vocabulary for describing LLM failures and, more importantly, a clear research program for making them more reliable. The path to robust AI may lie not just in scaling data and parameters, but in a deeper understanding of the fundamental principles of information that govern them.
+
+
+### Project context
+
+This repository is one focused case study within a broader research program on information structures for reliable LLMs. The larger effort explores how explicit structures—grounding via retrieval/graphs with provenance, structured redundancy and prompt gating, lightweight verification/feedback, and selective accept/verify/abstain policies—reduce uncertainty and factual error across tasks. The experiments and metrics here (redundancy ρ, alignment a, drift Δ, entropy E, hallucination rate h) are designed to be reusable in that larger context and compatible with future modules (e.g., KG/RAG‑grounded QA and detection‑correction loops).
