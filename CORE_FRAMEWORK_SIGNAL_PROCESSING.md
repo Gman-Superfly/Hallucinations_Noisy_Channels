@@ -1,11 +1,17 @@
 # Core Framework: LLM Forward Pass as a Semantic Communication Channel
 
-## Overview
+## Abstract
+
+This technical note refines the signal-processing interpretation of LLM hallucinations introduced in the main README. We formalize the forward pass as a noisy communication channel obeying Nyquist-Shannon constraints, quantify how transformer depth and attention patterns determine semantic bandwidth, and derive analytic risk metrics for reconstruction failure. The document serves as the canonical reference for the mathematical apparatus used throughout the repository.
+
+## Framework
+
+### Overview
 
 This document outlines the core framework for understanding LLM hallucinations through signal processing principles, 
 specifically treating the transformer forward pass as a communication channel governed by Nyquist-Shannon sampling theory.
 
-## The Core Analogy
+### The Core Analogy
 
 ### Forward Pass = Communication Channel
 - Each layer represents a stage in signal transmission
@@ -23,7 +29,7 @@ specifically treating the transformer forward pass as a communication channel go
 - Measures semantic clarity and focus
 - High ambiguity = noisy channel = more layers needed for reliable reconstruction
 
-## Mathematical Framework
+### Mathematical Framework
 
 ### Channel Capacity
 Following Shannon's formula for communication channels:
@@ -86,7 +92,7 @@ Hallucination_Risk = max(0, 1 - (C / concept_complexity))
 - **Aliasing**: Insufficient layers cause semantic distortion (hallucinations)
 - **Phase Alignment**: Attention patterns provide temporal coherence for reconstruction
 
-## Key Insights
+### Key Insights
 
 1. **Predictable Failures**: Hallucinations are not random but predictable reconstruction failures due to insufficient semantic sampling depth
 2. **Architecture Constraints**: Model depth creates fundamental limits on semantic complexity - more layers = higher capacity
@@ -97,7 +103,7 @@ Hallucination_Risk = max(0, 1 - (C / concept_complexity))
 7. **Low-Pass Filtering**: Transformers act as semantic low-pass filters, explaining why simple concepts are recalled easily while complex reasoning gets distorted
 8. **Energy Landscape**: The transformer creates predictable energy barriers that determine which semantic paths are "easy" vs. "hard" for tokens to traverse
 
-## Applications
+### Applications
 
 ### Model Selection
 - Choose appropriate model depth for task complexity
@@ -115,18 +121,31 @@ Hallucination_Risk = max(0, 1 - (C / concept_complexity))
 - Proactively identify risky inputs
 - Quantify reliability thresholds
 
-## Research Directions
+### Research Directions
 
 1. **Ambiguity Metrics**: Develop quantitative measures of attention scatter
 2. **Bandwidth Calculation**: Formalize the relationship between layers and semantic capacity
 3. **Threshold Prediction**: Determine minimum layers needed for given concept complexity
 4. **Empirical Validation**: Test predictions on real transformer architectures
 
-## Status
+## Experiments
+
+- `rope_accumulation.py`: validates the RoPE-driven phase-accumulation story by comparing latent drift under short vs. long prompts.
+- `samplig_reconstruction.py`: reproduces Nyquist sampling and demonstrates how undersampling inflates reconstruction error in the reference domain.
+- `simpleLM_test.py`: measures trajectory drift in a trained micro-transformer, showing statistically significant improvements when prompts cross the semantic information threshold.
+
+## Hypotheses
+
+1. **Semantic Bandwidth Limit:** Transformer depth and attention focus set a maximum concept complexity that can be reconstructed without aliasing.
+2. **Attention SNR Predictor:** The ratio of concept clarity to attention ambiguity predicts hallucination risk before decoding.
+3. **Phase Alignment Requirement:** Sufficient positional rotation (via RoPE or comparable encodings) is necessary to accumulate semantic phase and avoid drift.
+4. **Context-Length Optimum:** Increasing context beyond the semantic Nyquist rate introduces attention sinks and raises hallucination probability.
+
+## Conclusion
 
 This framework transforms the "messy practice" of constructing prompts "science" of semantic signal processing, 
 providing principled predictions for when hallucinations will occur based on architecture constraints, input complexity, and attention quality.
 
 ---
 
-*This document captures the core discussion about treating LLM hallucinations as a signal processing problem, where insufficient semantic sampling depth leads to reconstruction failure.*
+*This document captures the core discussion about treating LLM hallucinations as a signal-processing problem, where insufficient semantic sampling depth leads to predictable reconstruction failure.*
